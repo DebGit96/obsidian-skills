@@ -118,6 +118,22 @@ This entire block is hidden in reading view.
 ==Highlighted text==                   Highlight syntax
 ```
 
+### HTML Elements & Live Preview Gotchas
+
+Obsidian supports raw HTML inline and in blocks. However, in **Live Preview** (powered by CodeMirror 6), unclosed raw HTML tags that switch editor parsing mode—specifically `&lt;style&gt;`, `&lt;script&gt;`, and `&lt;template&gt;`—trap the editor in HTML syntax mode.
+
+> [!warning] Live Preview Parser Trap
+> An unclosed raw HTML tag (`&lt;style&gt;`, `&lt;script&gt;`, or `&lt;template&gt;`) traps CodeMirror 6 in HTML mode **even when placed inside inline code backticks**.
+> When trapped:
+> - Subsequent markdown lines render in red/coral as unclosed HTML element content.
+> - Interactive task checkboxes (`- [ ]`) cease functioning in Live Preview.
+> - Markdown formatting (links, headings, bold) is suppressed.
+>
+> **Recommended Alternatives:**
+> - Use closed pairs even in backticks: `<style></style>`, `<script></script>`, `<template></template>`.
+> - Use entity-encoded brackets in documentation: `&lt;style&gt;`, `&lt;script&gt;`, `&lt;template&gt;`.
+> - Or use plain prose: "the style tag", "the script tag".
+
 ## Math (LaTeX)
 
 ```markdown
